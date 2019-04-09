@@ -6,6 +6,7 @@
     <title>Intro a VueJS</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -16,6 +17,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <div id="app" class="container">
+        <button v-for="tab in tabs" v-bind:key="tab" v-bind:class="['tab-button', { active: currentTab === tab }]"
+            v-on:click="currentTab = tab">{{tab}}</button>
+        <component v-bind:is="currentTabComponent" class="tab"></component>
+    </div>
+
+    <template id="citiestemplate">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <ul class="list-group">
@@ -25,13 +32,49 @@
                 </ul>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-4" v-for="city in cities">
+                <city-card v-bind:city="city">
+
+                </city-card>
+            </div>
+        </div>
+    </template>
+
+    <template id="cityCard">
+        <div class="panel panel-primary">
+            <div panel-heading>
+                <h3 class="panel-title">{{city.Name}}</h3>
+            </div>
+        </div>
+    </template>
 
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                cities: []
+                cities: [],
+                currentTab: 'Cities',
+                tabs: ['Cities', 'Distances']
+            },
+            computed: {
+                currentTabComponent: function () {
+                    return 'tab-' + this.currentTab.toLowerCase()
+                }
+            }
+        })
+
+        Vue.component('city-card', {
+            props: ['city'],
+            template: '#cityCard'
+        })
+
+        Vue.component('tab-cities', {
+            template: '#citiestemplate',
+            data: function () {
+                return {
+                    cities: []
+                }
             },
             created: function () {
                 this.$http.get('http://localhost:8080/cities')
@@ -43,6 +86,10 @@
                     })
             },
         })
+        Vue.component('tab-distances', {
+            template: '<div>Distances component</div>'
+        })
+
     </script>
 </body>
 
