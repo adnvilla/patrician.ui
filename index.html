@@ -14,18 +14,26 @@
     <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
 
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
-    <!-- <script src="scripts/components/tabs.js"></script> -->
+    <script src="scripts/components/tabs.js"></script>
+    <script src="scripts/components/tab-cities.js"></script>
+    <script src="scripts/components/tab-distances.js"></script>
+    <script src="scripts/components/city-card.js"></script>
 </head>
 
 <body>
     <div id="app" class="container">
-        <button v-for="tab in tabs" v-bind:key="tab" v-bind:class="['tab-button', { active: currentTab === tab }]"
-            v-on:click="currentTab = tab">{{tab}}</button>
-
-        <component v-bind:is="currentTabComponent" class="tab"></component>
-
+        <tabs></tabs>
     </div>
 
+    <template id="tabstemplate">
+        <div>
+            <button v-for="tab in tabs" v-bind:key="tab" v-bind:class="['tab-button', { active: currentTab === tab }]"
+                v-on:click="currentTab = tab">{{tab}}</button>
+
+            <component v-bind:is="currentTabComponent" class="tab"></component>
+        </div>
+    </template>
+    
     <template id="cityCard">
         <div class="panel panel-primary">
             <div panel-heading>
