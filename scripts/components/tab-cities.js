@@ -1,6 +1,6 @@
 
 Vue.component('tab-cities', {
-    template: '#citiestemplate',
+    template: '#tabcities',
     data: function () {
         return {
             cities: []

@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Intro a VueJS</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
     <link rel="stylesheet" href="style.css">
 
     <!-- development version, includes helpful console warnings -->
@@ -17,6 +20,7 @@
     <script src="scripts/components/tabs.js"></script>
     <script src="scripts/components/tab-cities.js"></script>
     <script src="scripts/components/tab-distances.js"></script>
+    <script src="scripts/components/tab-markethall.js"></script>
     <script src="scripts/components/city-card.js"></script>
 </head>
 
@@ -42,7 +46,7 @@
         </div>
     </template>
 
-    <template id="citiestemplate">
+    <template id="tabcities">
         <div>
             <div class="col-md-6 col-md-offset-3">
                 <ul class="list-group">
@@ -53,6 +57,74 @@
             </div>
         </div>
     </template>
+
+
+    <template id="tabmarkethall">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-4">
+                    <select class="custom-select" v-model="cityselected">
+                        <option disabled value="">Please select one</option>
+                        <option v-for="city in cities">{{city.Name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Commodity</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Buy</th>
+                            <th scope="col">Sell</th>
+                            <th scope="col">Consumption</th>
+                            <th scope="col">Production</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="commodity in commodities">
+                            <th scope="row">
+                                {{commodity.Name}}
+                            </th>
+                            <td scope="row">
+                                <div v-if="commodity.CommodityType === 1">Load</div>
+                                <div v-else>
+                                    Barrel
+                                </div>
+                            </td>
+                            <td scope="row">
+                                <input type="text" class="form-control my-3" v-model.number="commodity.Buy">
+                            </td>
+                            <td scope="row">
+                                <input type="text" class="form-control my-3" v-model.number="commodity.Sell">
+                            </td>
+                            <td scope="row">
+                                <input type="text" class="form-control my-3" v-model.number="commodity.Consumption">
+                            </td>
+                            <td scope="row">
+                                <input type="text" class="form-control my-3" v-model.number="commodity.Production">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row justify-content-end">
+                <button class="btn btn-primary" v-on:click="save">Save</button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
     <script src="main.js"></script>
 </body>

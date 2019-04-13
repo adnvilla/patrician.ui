@@ -3,7 +3,7 @@ Vue.component('tabs', {
     data() {
         return {
             currentTab: 'cities',
-            tabs: ['cities', 'distances']
+            tabs: ['cities', 'distances', 'markethall']
         }
     },
     computed: {
