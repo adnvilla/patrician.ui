@@ -58,6 +58,39 @@
         </div>
     </template>
 
+    <template id="tabdistances">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-4">
+                    <select class="custom-select" v-model="cityselected" v-on:change="onChangeCitySelected">
+                        <option disabled value="">Please select one</option>
+                        <option v-for="city in cities">{{city.Name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">City</th>
+                            <th scope="col">Dintance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(distance, city) in distances">
+                            <th scope="row">
+                                {{city}}
+                            </th>
+                            <td scope="row">
+                                {{distance}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
+
 
     <template id="tabmarkethall">
         <div class="container">
