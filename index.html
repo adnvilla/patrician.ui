@@ -63,7 +63,7 @@
         <div class="container">
             <div class="row justify-content-end">
                 <div class="col-4">
-                    <select class="custom-select" v-model="cityselected">
+                    <select class="custom-select" v-model="cityselected" v-on:change="onChangeCitySelected">
                         <option disabled value="">Please select one</option>
                         <option v-for="city in cities">{{city.Name}}</option>
                     </select>
